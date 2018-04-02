@@ -3,21 +3,20 @@
 import osa
 import os
 
-
 file = os.path.join(*[os.path.dirname(os.path.abspath(__file__)), "currencies", "currencies.txt"])
 
-def extract_money_and_currency(file):
-    all_trips = []
+def extract(file):
+    list_of_trips = []
     with open(file) as f:
         trips = f.readlines()
         for trip in trips:
-            all_trips.append(trip.strip())
-    return all_trips
+            list_of_trips.append(trip.strip())
+    return list_of_trips
 
 
-def convertation(trips):
+def convertation(list_of_trips):
     total_sum = []
-    for trip in trips:
+    for trip in list_of_trips:
         money = trip.split()[1]
         currency = trip.split()[2]
         if currency != 'RUB':
@@ -32,4 +31,4 @@ def convertation(trips):
             total_sum.append(float(money))
     return int(sum(total_sum))
 
-print(convertation(extract_money_and_currency(file)))
+print(convertation(extract(file)))
